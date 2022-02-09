@@ -21,7 +21,13 @@ let pokemonList = [
 //     document.write('<p>' + pokemonList[i].name + (', height:')+ pokemonList[i].height + '</p>'); 
 // }
 
+let output = "";
 // Here is a shorter example of how to pring pokemon's name and height. 
 for (let i = 0; i < pokemonList.length; i++) {
-    document.write(`${pokemonList[i].name} (height: ${pokemonList[i].height})<br>`)
+    output = `${pokemonList[i].name} (height: ${pokemonList[i].height})`;
+    //Adding comment "Wow, that's big!" for largest pokemon.
+    if(pokemonList[i].height > 4) {
+        output = `${output} - Wow, that's big!`;
+    }
+    document.write(`${output}<br>`);
 }
