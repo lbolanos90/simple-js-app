@@ -18,20 +18,11 @@ let pokemonList = [
 ];
 
 //This prints the pokemon's name and height.
-let i = 0; 
+
 
 //Added {} to beginning and end of this strech of code and it printed another Charizard with the message. 
 
 for (let i = 0; i < pokemonList.length; i++) {
-  {
-    document.write(
-      "<p>" +
-        pokemonList[i].name +
-        ", (height:)" +
-        pokemonList[i].height +
-        "</p>"
-    );
-  }
   // I removed the ; after document.write
   if (pokemonList[i].height > 4) 
   {
@@ -41,6 +32,16 @@ for (let i = 0; i < pokemonList.length; i++) {
         ",( height: )" +
         pokemonList[i].height +
         " - Wow, that's big!" +
+        "</p>"
+    );
+  }
+  else if (pokemonList[i].height <= 4) 
+  {
+    document.write(
+      "<p>" +
+        pokemonList[i].name +
+        ",( height: )" +
+        pokemonList[i].height +
         "</p>"
     );
   }
