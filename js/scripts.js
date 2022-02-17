@@ -1,3 +1,5 @@
+let pokemonRepository = (function() {
+
 let pokemonList = [
   //I only added these 3 pokemon but plan on adding more later.
   {
@@ -17,8 +19,27 @@ let pokemonList = [
   },
 ];
 
+function add(pokemon) { 
+  pokemonList.push(pokemon); 
+}
+function getAll() {
+  return pokemonList;
+}
+return {
+  add: add,
+  getAll: getAll
+};
+
+})(); 
+
+//console actions
+console.log(pokemonRepository.getAll());
+pokemonRepository.add({name: 'Pikachu', height: '3'});
+console.log(pokemonRepository.getAll());
+
+
 //New forEach code
-pokemonList.forEach(function (specs) {
+(pokemonRepository.getAll()).forEach(function (specs) {
   if (specs.height > 4) {
     document.write(
       "<p>" +
