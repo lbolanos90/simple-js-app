@@ -17,26 +17,17 @@ let pokemonList = [
   },
 ];
 
-//This prints the pokemon's name and height.
-
-
-for (let i = 0; i < pokemonList.length; i++) {
-  if (pokemonList[i].height > 4) {
+//New forEach code
+pokemonList.forEach(function (specs) {
+  if (specs.height > 4) {
     document.write(
       "<p>" +
-        pokemonList[i].name +
-        ",( height: )" +
-        pokemonList[i].height +
-        " - Wow, that's big!" +
+        specs.name +
+        " (height: " +
+        specs.height +
+        " ft) -" +
+        "Wow that's big!" +
         "</p>"
     );
-  } else {
-    document.write(
-      "<p>" +
-        pokemonList[i].name +
-        ",( height: )" +
-        pokemonList[i].height +
-        "</p>"
-    );
-  }
-}
+  } else document.write("<p>" + specs.name + " (height: " + specs.height + " ft)" + "</p>");
+});
