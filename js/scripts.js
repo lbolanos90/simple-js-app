@@ -1,3 +1,4 @@
+//IIFE
 let pokemonRepository = (function() {
 
 let pokemonList = [
@@ -22,8 +23,11 @@ let pokemonList = [
 function add(pokemon) { 
   //add limitation of only accepting objects.
   if ( typeof pokemon === 'object' && !Array.isArray(pokemon) && pokemon !== null ) {
-  //Had to move the actual executed code below the if statement instead of above. 
-    pokemonList.push(pokemon);
+    /* Hey Edward this is where I've been trying to implement the object.keys method but it's not working please help...
+    if(Object.keys(pokemonList).forEach(function(pokemon) {
+       pokemonList.push(pokemon);}
+    */   
+       pokemonList.push(pokemon);
   }
 }
 
@@ -37,7 +41,7 @@ return {
 
 })(); 
 
-//console actions
+//console actions 
 console.log(pokemonRepository.getAll());
 pokemonRepository.add({name: 'Pikachu', height: '3'});
 console.log(pokemonRepository.getAll());
