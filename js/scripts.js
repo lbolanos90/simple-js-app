@@ -20,8 +20,13 @@ let pokemonList = [
 ];
 
 function add(pokemon) { 
-  pokemonList.push(pokemon); 
+  //add limitation of only accepting objects.
+  if ( typeof pokemon === 'object' && !Array.isArray(pokemon) && pokemon !== null ) {
+  //Had to move the actual executed code below the if statement instead of above. 
+    pokemonList.push(pokemon);
+  }
 }
+
 function getAll() {
   return pokemonList;
 }
@@ -36,9 +41,12 @@ return {
 console.log(pokemonRepository.getAll());
 pokemonRepository.add({name: 'Pikachu', height: '3'});
 console.log(pokemonRepository.getAll());
+//added an extra pokemon using this method. 
+pokemonRepository.add({name: 'Rychu', height: '4'});
+console.log(pokemonRepository.getAll());
 
 
-//New forEach code
+//New forEach code  
 (pokemonRepository.getAll()).forEach(function (specs) {
   if (specs.height > 4) {
     document.write(
