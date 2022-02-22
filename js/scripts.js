@@ -6,61 +6,67 @@ let pokemonList = [
   {
     name: "Ivysaur",
     height: 3,
-    type: "grass and poison",
+    type: "Grass and Poison",
   },
   {
     name: "Charmander",
     height: 5,
-    type: "fire",
+    type: "Fire",
   },
   {
     name: "Squirtle",
     height: 4,
-    type: "water",
+    type: "Water",
   },
 ];
 
 function add(pokemon) { 
   //add limitation of only accepting objects.
-  if ( typeof pokemon === 'object' && !Array.isArray(pokemon) && pokemon !== null ) {
-    /* Hey Edward this is where I've been trying to implement the object.keys method but it's not working please help...
-    if(Object.keys(pokemonList).forEach(function(pokemon) {
-       pokemonList.push(pokemon);}
-    */   
-       pokemonList.push(pokemon);
-  }
-}
+  if ( typeof pokemon === 'object' && !Array.isArray(pokemon) && pokemon !== null )
+  if(Object.keys(pokemon).includes('name') &&
+  Object.keys(pokemon).includes('height') &&
+  Object.keys(pokemon).includes('type') &&
+  Object.keys(pokemon).length === 3) {
+  pokemonList.push(pokemon);
+  } 
+}  
 
 function getAll() {
   return pokemonList;
 }
+
+function addListItem(pokemon) {
+  
+  let unorderedList = document.querySelector('.pokemon-list');
+  let listItem = document.createElement('li');
+  let button = document.createElement('button');
+  button.innerText = (pokemon.name);
+  button.classList.add('pokemonButton'); 
+  listItem.appendChild(button);
+  //Appending list item...
+  unorderedList.appendChild(listItem); 
+}
+
 return {
   add: add,
-  getAll: getAll
+  getAll: getAll,
+  addListItem: addListItem
 };
 
 })(); 
+//end of IIFE
+
 
 //console actions 
 console.log(pokemonRepository.getAll());
-pokemonRepository.add({name: 'Pikachu', height: '3'});
+pokemonRepository.add({name: 'Pikachu', height: '3', type:'Eletric'});
 console.log(pokemonRepository.getAll());
 //added an extra pokemon using this method. 
-pokemonRepository.add({name: 'Rychu', height: '4'});
+pokemonRepository.add({name: 'Raichu', height: '4', type:'Electric'});
 console.log(pokemonRepository.getAll());
 
 
 //New forEach code  
-(pokemonRepository.getAll()).forEach(function (specs) {
-  if (specs.height > 4) {
-    document.write(
-      "<p>" +
-        specs.name +
-        " (height: " +
-        specs.height +
-        " ft) -" +
-        "Wow that's big!" +
-        "</p>"
-    );
-  } else document.write("<p>" + specs.name + " (height: " + specs.height + " ft)" + "</p>");
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);
 });
