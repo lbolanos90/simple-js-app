@@ -43,8 +43,15 @@ function addListItem(pokemon) {
   button.innerText = (pokemon.name);
   button.classList.add('pokemonButton'); 
   listItem.appendChild(button);
-  //Appending list item...
   unorderedList.appendChild(listItem); 
+  //Button Event Listener 
+  button.addEventListener('click', function(){
+    showDetails(pokemon.name);
+  });
+}
+
+function showDetails(pokemon) {
+  console.log(pokemon);
 }
 
 return {
