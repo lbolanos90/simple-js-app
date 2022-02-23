@@ -1,32 +1,14 @@
 //IIFE
 let pokemonRepository = (function() {
 
-let pokemonList = [
-  //I only added these 3 pokemon but plan on adding more later.
-  {
-    name: "Ivysaur",
-    height: 3,
-    type: "Grass and Poison",
-  },
-  {
-    name: "Charmander",
-    height: 5,
-    type: "Fire",
-  },
-  {
-    name: "Squirtle",
-    height: 4,
-    type: "Water",
-  },
-];
+let pokemonList = [];
+//Added Pokemon API here...
+let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
 
 function add(pokemon) { 
   //add limitation of only accepting objects.
-  if ( typeof pokemon === 'object' && !Array.isArray(pokemon) && pokemon !== null )
-  if(Object.keys(pokemon).includes('name') &&
-  Object.keys(pokemon).includes('height') &&
-  Object.keys(pokemon).includes('type') &&
-  Object.keys(pokemon).length === 3) {
+  if ( typeof pokemon === 'object' && 'name' in pokemon/*[OLD CODE]!Array.isArray(pokemon) && pokemon !== null */)
+  /*[OLD CODE]if(Object.keys(pokemon).includes('name')*/ {
   pokemonList.push(pokemon);
   } 
 }  
@@ -45,35 +27,68 @@ function addListItem(pokemon) {
   listItem.appendChild(button);
   unorderedList.appendChild(listItem); 
   //Button Event Listener 
-  button.addEventListener('click', function(){
-    showDetails(pokemon.name);
+  button.addEventListener('click', function(event){
+    showDetails(pokemon);
   });
 }
+//will try to work this bonus task out...
+function showLoadingMessage (){}
 
-function showDetails(pokemon) {
-  console.log(pokemon);
+function hideLoadingMessage(){}
+
+function loadList() {
+  return fetch(apiUrl).then(function (response) {
+    return response.json(); 
+  }).then(function (json) {
+    json.results.forEach(function (item) {
+      let pokemon = {
+        name: item.name, 
+        detailsUrl: item.url 
+      }; 
+      add(pokemon); 
+      console.log(pokemon);
+    });
+  }).catch(function (e) {
+    console.error(e);
+  })
 }
 
-return {
+function loadDetails (item){
+  let url = item.detailsUrl;
+  return fetch(url).then(function (response){
+    return response.json(); 
+  }).then(function (details){
+    item.imageUrl = details.sprites.front_default;
+    item.height = details.height;
+    //consider adding a "for loop" here to console.log the actual pokemon type 
+    item.types = details.types;
+  }).catch(function (e){
+    console.error(e); 
+  }); 
+}
+
+function showDetails(item) {
+  pokemonRepository.loadDetails(item).then(function() {
+  console.log(item);
+}); 
+}
+
+return {  
   add: add,
   getAll: getAll,
-  addListItem: addListItem
+  addListItem: addListItem,
+  loadList: loadList,
+  loadDetails: loadDetails, 
+  showDetails: showDetails
 };
 
 })(); 
 //end of IIFE
 
+//New console actions down here...
+pokemonRepository.loadList().then(function() {
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon); 
+  }); 
+}); 
 
-//console actions 
-console.log(pokemonRepository.getAll());
-pokemonRepository.add({name: 'Pikachu', height: '3', type:'Eletric'});
-console.log(pokemonRepository.getAll());
-//added an extra pokemon using this method. 
-pokemonRepository.add({name: 'Raichu', height: '4', type:'Electric'});
-console.log(pokemonRepository.getAll());
-
-
-//New forEach code  
-pokemonRepository.getAll().forEach(function (pokemon) {
-  pokemonRepository.addListItem(pokemon);
-});
