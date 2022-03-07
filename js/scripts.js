@@ -58,6 +58,7 @@ function loadDetails (item){
   return fetch(url).then(function (response){
     return response.json(); 
   }).then(function (details){
+    item.name = details.names; 
     item.imageUrl = details.sprites.front_default;
     item.height = details.height;
     //consider adding a "for loop" here to console.log the actual pokemon type 
@@ -66,12 +67,61 @@ function loadDetails (item){
     console.error(e); 
   }); 
 }
-
+// new stuff all down here...
 function showDetails(item) {
   pokemonRepository.loadDetails(item).then(function() {
-  console.log(item);
+  //console.log(item); removed the console.log and used the showModal(item) instead
+  showModal(item);
 }); 
 }
+
+function showModal(item) {
+
+  let modalContainer = document.querySelector('#modal-container');
+  modalContainer.innerHTML = '';
+  let modal = document.createElement('div');
+  modal.classList.add('modal');
+
+  let closeButtonElement = document.createElement('button');
+  closeButtonElement.classList.add('modal-close');
+  closeButtonElement.innerText = 'Close';
+  closeButtonElement.addEventListener('click', hideModal);
+
+  let titleElement = document.createElement('h1');
+  titleElement.innerText = item.name;
+
+  let imageElement = document.createElement('img');
+  imageElement.setAttribute("src", item.imageUrl); 
+
+  let heightElement = docment.createElement('p')
+  heightElement.innerText = item.height; 
+
+  modal.appendChild(closeButtonElement);
+  modal.appendChild(titleElement);
+  modal.appendChild(imageElement);
+  modal.appendChild(heightElement);
+  modalContainer.appendChild(modal); 
+
+  modalContainer.classList.add('is-visible');
+} 
+
+function hideModal() {
+  modalContainer.classList.remove('is-visible');
+}
+
+window.addEventListener('keydown', (e) => {
+  let modalContainer = document.querySelector('#modal-container'); 
+  if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+    hideModal();
+  }
+ });
+
+modalContainer.addEventListener('click', (e) => {
+  let target = e.target;
+  if (target === modalContainer) {
+    hideModal(); 
+  }
+});
 
 return {  
   add: add,
@@ -79,7 +129,8 @@ return {
   addListItem: addListItem,
   loadList: loadList,
   loadDetails: loadDetails, 
-  showDetails: showDetails
+  showDetails: showDetails,
+  showModal: showModal
 };
 
 })(); 
@@ -89,7 +140,7 @@ return {
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon){
     pokemonRepository.addListItem(pokemon); 
-  })
+  });
 });
   
   
