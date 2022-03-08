@@ -2,6 +2,18 @@
 
 /* Not being used at the moment */
 
+img {
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
 
 p {
     text-align: center;
@@ -41,6 +53,7 @@ body {
   margin: 1em auto;
   width: 320px;
   cursor:cell; 
+  text-transform: capitalize;
 }
 
 .pokemonButton:hover {
@@ -94,10 +107,10 @@ body {
   display: inline-block;
   box-sizing: border-box;
   background: #fff;
-  padding: 15px;
+  padding: 25px;
   width: 100%;
   max-width: 700px;
-  text-align: left;
+  text-align: center;
 }
 
 .modal-close {
@@ -119,9 +132,9 @@ body {
 
 #modal-container {
   display: none;
+  text-transform: capitalize;
 }
 
 #modal-container.is-visible {
-  /* CSS for modal container - add your own desired CSS styles here */
   display: block;
 }
