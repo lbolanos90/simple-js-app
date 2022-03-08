@@ -1,14 +1,13 @@
 //IIFE
 let pokemonRepository = (function() {
-
+//Global items
 let pokemonList = [];
-//Added Pokemon API here...
 let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
+let modalContainer = document.querySelector('#modal-container');
 
 function add(pokemon) { 
   //add limitation of only accepting objects.
-  if ( typeof pokemon === 'object' && 'name' in pokemon/*[OLD CODE]!Array.isArray(pokemon) && pokemon !== null */)
-  /*[OLD CODE]if(Object.keys(pokemon).includes('name')*/ {
+  if ( typeof pokemon === 'object' && 'name' in pokemon/*[OLD CODE]!Array.isArray(pokemon) && pokemon !== null */) {
   pokemonList.push(pokemon);
   } 
 }  
@@ -58,7 +57,7 @@ function loadDetails (item){
   return fetch(url).then(function (response){
     return response.json(); 
   }).then(function (details){
-    item.name = details.names; 
+    item.name = details.name; 
     item.imageUrl = details.sprites.front_default;
     item.height = details.height;
     //consider adding a "for loop" here to console.log the actual pokemon type 
@@ -76,11 +75,13 @@ function showDetails(item) {
 }
 
 function showModal(item) {
-
   let modalContainer = document.querySelector('#modal-container');
   modalContainer.innerHTML = '';
+
+  //Create's modal
   let modal = document.createElement('div');
   modal.classList.add('modal');
+  modalContainer.classList.add('is-visible');
 
   let closeButtonElement = document.createElement('button');
   closeButtonElement.classList.add('modal-close');
@@ -93,7 +94,7 @@ function showModal(item) {
   let imageElement = document.createElement('img');
   imageElement.setAttribute("src", item.imageUrl); 
 
-  let heightElement = docment.createElement('p')
+  let heightElement = document.createElement('p')
   heightElement.innerText = item.height; 
 
   modal.appendChild(closeButtonElement);
@@ -102,8 +103,11 @@ function showModal(item) {
   modal.appendChild(heightElement);
   modalContainer.appendChild(modal); 
 
-  modalContainer.classList.add('is-visible');
 } 
+
+document.querySelector('#show-modal').addEventListener('click', () => {
+  showModal(item);
+});
 
 function hideModal() {
   modalContainer.classList.remove('is-visible');
