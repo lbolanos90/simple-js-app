@@ -95,7 +95,7 @@ function showModal(item) {
   imageElement.setAttribute("src", item.imageUrl); 
 
   let heightElement = document.createElement('p')
-  heightElement.innerText = item.height; 
+  heightElement.innerText = "Height: " + item.height; 
 
   modal.appendChild(closeButtonElement);
   modal.appendChild(titleElement);
