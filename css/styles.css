@@ -138,3 +138,7 @@ body {
 #modal-container.is-visible {
   display: block;
 }
+
+#show-modal {
+  display: none;
+}
