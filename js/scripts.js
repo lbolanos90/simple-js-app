@@ -20,9 +20,11 @@ function addListItem(pokemon) {
   
   let unorderedList = document.querySelector('.pokemon-list');
   let listItem = document.createElement('li');
+  //button
   let button = document.createElement('button');
   button.innerText = (pokemon.name);
-  button.classList.add('pokemonButton'); 
+  button.classList.add('btn btn-primary btn-lg active'); 
+  listItem.classList.add('group-list-item')
   listItem.appendChild(button);
   unorderedList.appendChild(listItem); 
   //Button Event Listener 
@@ -58,10 +60,13 @@ function loadDetails (item){
     return response.json(); 
   }).then(function (details){
     item.name = details.name; 
-    item.imageUrl = details.sprites.front_default;
+    item.imageUrlFront = details.sprites.front_default;
+    item.imageUrlBack = details.sprites.back_default;
     item.height = details.height;
     //consider adding a "for loop" here to console.log the actual pokemon type 
     item.types = details.types;
+    item.weight = details.weight;
+    item.abilities = details.abilities;
   }).catch(function (e){
     console.error(e); 
   }); 
@@ -75,6 +80,28 @@ function showDetails(item) {
 }
 
 function showModal(item) {
+  //new BS Modal Functions..this allows me to connect the two.
+  let modalBody = $(".modal-body");
+  let modalTitle = $(".modal-title");
+  let modalHeader = $(".modal-header");
+  //Clears existing modal content
+  modalTitle.empty();
+  modalBody.empty();
+  modalHeader.empty(); 
+  //Creating element for pokemon name
+  let nameElement = $("<h1>" + item.name + "</h1>");
+  //Picture element
+  let imageElementFront = $('<img class="modal-img" style="width:50%">');
+  imageElementFront.attr("src", item.imageUrlFront);
+  let imageElementBack = $('<img class="modal-img" style="width:50%">');
+  imageElementBack.attr("src", item.imageUrlBack);
+  let heightElementFront = $("<p>" + "Height: " + item.height + "</p>");
+  //This is new information
+  let weightElement = $("<p>" + "Weight: " + item.weight + "</p>");
+  let typesElement = $("<p>" + "Type(s): " + item.types + "</p>");
+  let abilitiesElement = $("<p>" + "Abilities: " + item.abilities + "</p>");
+  
+
   let modalContainer = document.querySelector('#modal-container');
   modalContainer.innerHTML = '';
 
@@ -82,9 +109,9 @@ function showModal(item) {
   let modal = document.createElement('div');
   modal.classList.add('modal');
   modalContainer.classList.add('is-visible');
-
+  //button
   let closeButtonElement = document.createElement('button');
-  closeButtonElement.classList.add('modal-close');
+  closeButtonElement.classList.add('btn btn-primary btn-lg active');
   closeButtonElement.innerText = 'Close';
   closeButtonElement.addEventListener('click', hideModal);
 
@@ -97,10 +124,20 @@ function showModal(item) {
   let heightElement = document.createElement('p')
   heightElement.innerText = "Height: " + item.height; 
 
+  //new append elements
+  modalTitle.append(nameElement); 
+  modalBody.append(imageElementFront);
+  modalBody.append(imageElementBack);
+  modalBody.append(heightElementFront);
+  modalBody.append(weightElement);
+  modalBody.append(typesElement);
+  modalBody.append(abilitiesElement);
+
+  
   modal.appendChild(closeButtonElement);
   modal.appendChild(titleElement);
   modal.appendChild(imageElement);
-  modal.appendChild(heightElement);
+  modal.appendChild(heightElement); 
   modalContainer.appendChild(modal); 
 
 } 
