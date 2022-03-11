@@ -15,6 +15,8 @@
     />  
   </head>
 
+  <header class="page-header"></header>
+
   <body>
     <!--Copied over BS Code HTML-->
     <!-- Button trigger modal -->
@@ -22,34 +24,42 @@
     Launch demo modal
   </button> -->
   <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="index.html">
         <img src="img/pokeball.svg" width="30" height="30" class="d-inline-block align-top" alt="pokeball">
     PokeDex
       </a>
   </nav>
   
   <!-- Modal -->
-  <!--What ID do I put here?-->
-  <div class="modal fade" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <!--What ID do I put here?-->
+<div class="container">
+  <div class="row"> 
+    <div class="col">
+      <ul class="list-group list-unstyled flex-row flex-wrap w-100 justify-content:center" data-toggle="modal" data-target="#show-modal"></ul>
+        <div class="modal fade" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
   </div>
+</div>  
   <!--End of BS Modal Code-->
+  <!-- Pokemon List -->
+  <!-- <div class ="pokemon-list list-group"></div> -->
   
     <!-- <ul class="pokemon-list list-group"></ul> 
     <button id='show-modal'>Show modal</button>
