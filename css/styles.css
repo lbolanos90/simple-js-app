@@ -2,6 +2,9 @@
 
 /* Not being used at the moment */
 
+button {
+  text-transform: capitalize;
+}
 img {
 
   display: block;
@@ -29,6 +32,10 @@ p {
 
 body {
     background-color: #ffffff;
+}
+
+.uppercase {
+  text-transform: capitalize;
 }
 
 .pokemonButton {
