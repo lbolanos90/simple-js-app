@@ -33,6 +33,7 @@ function addListItem(pokemon) {
   let button = document.createElement('button');
   button.innerText = (pokemon.name);
   button.classList.add('btn-primary'); 
+  button.classList.add('btn-lg'); 
   listItem.classList.add('group-list-item')
   listItem.appendChild(button);
   unorderedList.appendChild(listItem); 
