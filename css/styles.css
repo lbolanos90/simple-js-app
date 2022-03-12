@@ -2,9 +2,10 @@
 
 /* Not being used at the moment */
 
-button {
+.buttonChanges {
   text-transform: capitalize;
   margin: 3px;
+  padding: 50px;
 }
 img {
 
